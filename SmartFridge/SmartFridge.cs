@@ -34,11 +34,18 @@ public class SmartFridge(DateTime currentDate, EventManager manager)
             return string.Empty;
         var lines = new List<string>();
         
-        foreach (var item in state.Values)
+        foreach (var item in state.Values.OrderBy(i => i.Expiry))
         {
             var remaining = (item.Expiry - currentDate).Days;
+            if (remaining == 1)
+            {
+                lines.Add($"{item.Name}: {remaining} day remaining");
+            }
+            else
+            {
+                lines.Add($"{item.Name}: {remaining} days remaining");
+            }
             
-            lines.Add($"{item.Name}: {remaining} days remaining");
         }
 
         return string.Join("\n", lines);

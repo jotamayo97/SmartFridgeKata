@@ -99,4 +99,27 @@ public class SmartFridgeShould
 
         Assert.Equal("Milk: 3 days remaining", display);
     }
+    
+    [Fact]
+    public void display_shows_multiple_items_sorted_by_expiry()
+    {
+        var date = new DateTime(2021, 10, 18);
+        var manager = new EventManager();
+        var fridge = new SmartFridge(date, manager);
+
+        fridge.FridgeDoorOpened();
+        fridge.ItemAdded("Milk", date.AddDays(3), ItemState.Sealed);
+        fridge.ItemAdded("Beef", date.AddDays(1), ItemState.Sealed);
+        fridge.ItemAdded("Cheese", date.AddDays(10), ItemState.Sealed);
+        fridge.FridgeDoorClosed();
+
+        var display = fridge.Display();
+
+        Assert.Equal(
+            "Beef: 1 day remaining\n" +
+            "Milk: 3 days remaining\n" +
+            "Cheese: 10 days remaining",
+            display
+        );
+    }
 }
