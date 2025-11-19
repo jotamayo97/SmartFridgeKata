@@ -19,7 +19,7 @@ public class SmartFridge(DateTime currentDate, EventManager manager)
 
     public void DayOver()
     {
-        throw new NotImplementedException();
+        manager.RegisterEvent(new DayOverEvent(currentDate));
     }
 
     public void ItemRemoved(string name)

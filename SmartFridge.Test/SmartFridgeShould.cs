@@ -160,4 +160,42 @@ public class SmartFridgeShould
 
         Assert.Equal("EXPIRED: Milk", display);
     }
+    
+    [Fact]
+    public void newly_added_items_after_opening_do_not_receive_past_degradation()
+    {
+        var current = new DateTime(2021, 10, 18, 0, 0, 0);
+        var manager = new EventManager();
+        var fridge = new SmartFridge(current, manager);
+        
+        fridge.FridgeDoorOpened();
+        fridge.FridgeDoorClosed();
+        
+        fridge.ItemAdded("Cheese", 
+            new DateTime(2021, 10, 20, 0, 0, 0), 
+            ItemState.Sealed
+        );
+
+        var display = fridge.Display();
+        
+        Assert.Equal("Cheese: 2 days remaining", display);
+    }
+    
+    [Fact]
+    public void dayover_reduces_one_day_of_remaining_time_for_all_items()
+    {
+        var date = new DateTime(2021, 10, 18, 0, 0, 0);
+        var manager = new EventManager();
+        var fridge = new SmartFridge(date, manager);
+
+        fridge.FridgeDoorOpened();
+        fridge.ItemAdded("Milk", new DateTime(2021, 10, 21), ItemState.Sealed);
+        fridge.FridgeDoorClosed();
+        
+        Assert.Equal("Milk: 3 days remaining", fridge.Display());
+
+        fridge.DayOver();
+        
+        Assert.Equal("Milk: 2 days remaining", fridge.Display());
+    }
 }

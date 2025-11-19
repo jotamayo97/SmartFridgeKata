@@ -37,6 +37,18 @@ public class EventManager
                     };
                 }
             }
+            if (ev is DayOverEvent)
+            {
+                foreach (var key in state.Keys.ToList())
+                {
+                    var item = state[key];
+                    
+                    state[key] = item with
+                    {
+                        Expiry = item.Expiry - TimeSpan.FromDays(1)
+                    };
+                }
+            }
         }
 
         return state;
