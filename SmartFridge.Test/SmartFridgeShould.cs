@@ -122,4 +122,23 @@ public class SmartFridgeShould
             display
         );
     }
+    
+    [Fact]
+    public void opening_and_closing_the_fridge_degrades_items()
+    {
+        var current = new DateTime(2021, 10, 18, 0, 0, 0);
+        var manager = new EventManager();
+        var fridge = new SmartFridge(current, manager);
+
+        fridge.FridgeDoorOpened();
+        fridge.ItemAdded("Cheese", new DateTime(2021, 10, 19, 0, 0, 0), ItemState.Opened);
+        fridge.FridgeDoorClosed();
+        
+        fridge.FridgeDoorOpened();
+        fridge.FridgeDoorClosed();
+
+        var display = fridge.Display();
+        
+        Assert.Equal("Cheese: 0 days remaining", display);
+    }
 }

@@ -37,6 +37,10 @@ public class SmartFridge(DateTime currentDate, EventManager manager)
         foreach (var item in state.Values.OrderBy(i => i.Expiry))
         {
             var remaining = (item.Expiry - currentDate).Days;
+            if (remaining < 0)
+            {
+                lines.Add($"EXPIRED: {item.Name}");
+            }
             if (remaining == 1)
             {
                 lines.Add($"{item.Name}: {remaining} day remaining");
