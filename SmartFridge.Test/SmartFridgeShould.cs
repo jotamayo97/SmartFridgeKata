@@ -198,4 +198,25 @@ public class SmartFridgeShould
         
         Assert.Equal("Milk: 2 days remaining", fridge.Display());
     }
+    
+    [Fact]
+    public void removing_an_item_makes_it_disappear_from_display()
+    {
+        var date = new DateTime(2021, 10, 18);
+        var manager = new EventManager();
+        var fridge = new SmartFridge(date, manager);
+
+        fridge.FridgeDoorOpened();
+        fridge.ItemAdded("Milk", date.AddDays(3), ItemState.Sealed);
+        fridge.ItemAdded("Cheese", date.AddDays(10).AddHours(1), ItemState.Sealed);
+        fridge.FridgeDoorClosed();
+        
+        fridge.FridgeDoorOpened();
+        fridge.ItemRemoved("Milk");
+        fridge.FridgeDoorClosed();
+
+        var display = fridge.Display();
+
+        Assert.Equal("Cheese: 10 days remaining", display);
+    }
 }

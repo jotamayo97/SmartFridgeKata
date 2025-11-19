@@ -9,3 +9,5 @@ public record ItemAddedEvent(string productName, DateTime expiry, ItemState stat
 public record FridgeDoorClosedEvent(DateTime timestamp) : IFridgeEvent;
 
 public record DayOverEvent(DateTime timestamp) : IFridgeEvent;
+
+public record ItemRemovedEvent(string name,DateTime timestamp) : IFridgeEvent;

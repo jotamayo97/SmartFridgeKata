@@ -24,7 +24,7 @@ public class SmartFridge(DateTime currentDate, EventManager manager)
 
     public void ItemRemoved(string name)
     {
-        throw new NotImplementedException();
+        manager.RegisterEvent(new ItemRemovedEvent(name, currentDate));
     }
 
     public string Display()

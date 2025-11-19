@@ -49,6 +49,11 @@ public class EventManager
                     };
                 }
             }
+            
+            if (ev is ItemRemovedEvent)
+            {
+                state.Remove(((ItemRemovedEvent)ev).name);
+            }
         }
 
         return state;
