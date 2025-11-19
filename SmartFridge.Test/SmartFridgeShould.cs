@@ -141,4 +141,23 @@ public class SmartFridgeShould
         
         Assert.Equal("Cheese: 0 days remaining", display);
     }
+    
+    [Fact]
+    public void multiple_fridge_openings_accumulate_degradation_and_can_expire_items()
+    {
+        var current = new DateTime(2021, 10, 18, 0, 0, 0);
+        var manager = new EventManager();
+        var fridge = new SmartFridge(current, manager);
+        fridge.FridgeDoorOpened();
+        fridge.ItemAdded("Milk", new DateTime(2021, 10, 18, 0, 0, 0), ItemState.Opened);
+        fridge.FridgeDoorClosed();
+        
+        fridge.FridgeDoorOpened();
+        fridge.FridgeDoorClosed();
+        
+
+        var display = fridge.Display();
+
+        Assert.Equal("EXPIRED: Milk", display);
+    }
 }
