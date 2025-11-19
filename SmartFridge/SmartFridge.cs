@@ -2,7 +2,7 @@
 
 public class SmartFridge
 {
-    public void SetCurrentDate(string s)
+    public void SetCurrentDate(DateTime s)
     {
         throw new NotImplementedException();
     }
@@ -12,7 +12,7 @@ public class SmartFridge
         throw new NotImplementedException();
     }
 
-    public void ItemAdded(string name, string p1, ItemState @sealed)
+    public void ItemAdded(string name, DateTime p1, ItemState @sealed)
     {
         throw new NotImplementedException();
     }
