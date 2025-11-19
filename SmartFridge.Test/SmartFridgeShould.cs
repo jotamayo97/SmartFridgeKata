@@ -58,4 +58,13 @@ public class SmartFridgeShould
             display);
     
     }
+    
+    [Fact]
+    public void Display_shows_empty_when_fridge_has_no_items()
+    {
+        var fridge = new SmartFridge();
+        fridge.SetCurrentDate(new DateTime(2021,10,18));
+
+        Assert.Equal(string.Empty, fridge.Display());
+    }
 }

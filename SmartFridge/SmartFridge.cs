@@ -1,10 +1,12 @@
 ﻿namespace SmartFridge;
 
-public class SmartFridge
-{
-    public void SetCurrentDate(DateTime s)
+public class SmartFridge{
+
+    private DateTime currentDate;
+
+    public void SetCurrentDate(DateTime dateTime)
     {
-        throw new NotImplementedException();
+        currentDate = dateTime;
     }
 
     public void FridgeDoorOpened()
@@ -34,6 +36,6 @@ public class SmartFridge
 
     public string Display()
     {
-        throw new NotImplementedException();
+        return string.Empty;
     }
 }
