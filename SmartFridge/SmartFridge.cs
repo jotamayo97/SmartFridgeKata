@@ -1,12 +1,10 @@
 ﻿namespace SmartFridge;
 
-public class SmartFridge(DateTime dateTime)
+public class SmartFridge(DateTime currentDate, EventManager manager)
 {
-    private DateTime currentDate;
-
     public void FridgeDoorOpened()
     {
-        throw new NotImplementedException();
+        manager.RegisterEvent(new FridgeDoorOpenedEvent(currentDate));
     }
 
     public void ItemAdded(string name, DateTime p1, ItemState @sealed)

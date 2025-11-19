@@ -1,11 +1,13 @@
-﻿namespace SmartFridge.Test;
+﻿using NSubstitute;
+
+namespace SmartFridge.Test;
 
 public class SmartFridgeShould
 {
     [Fact]
     public void Acceptance_scenario()
     {
-        var fridge = new SmartFridge(new DateTime(2021, 10, 18, 0, 0, 0));
+        var fridge = new SmartFridge(new DateTime(2021, 10, 18, 0, 0, 0), new EventManager());
 
         fridge.FridgeDoorOpened();
         fridge.ItemAdded("Milk",    new DateTime(2021, 10, 21, 0, 0, 0), ItemState.Sealed);
@@ -61,8 +63,24 @@ public class SmartFridgeShould
     [Fact]
     public void Display_shows_empty_when_fridge_has_no_items()
     {
-        var fridge = new SmartFridge(new DateTime(2021,10,18));
+        var fridge = new SmartFridge(new DateTime(2021,10,18), new EventManager());
 
         Assert.Equal(string.Empty, fridge.Display());
+    }
+    
+    [Fact]
+    public void record_a_FridayDoorOpened_event()
+    {
+        var date = new DateTime(2021,10,18);
+        
+        var manager = Substitute.For<EventManager>();
+        
+        var fridge = new SmartFridge(date, manager);
+
+        fridge.FridgeDoorOpened();
+        
+        manager.Received(1)
+               .RegisterEvent(Arg.Any<FridgeDoorOpenedEvent>());
+    
     }
 }
