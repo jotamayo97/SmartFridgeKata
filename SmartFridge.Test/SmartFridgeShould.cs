@@ -5,8 +5,7 @@ public class SmartFridgeShould
     [Fact]
     public void Acceptance_scenario()
     {
-        var fridge = new SmartFridge();
-        fridge.SetCurrentDate(new DateTime(2021, 10, 18, 0, 0, 0));
+        var fridge = new SmartFridge(new DateTime(2021, 10, 18, 0, 0, 0));
 
         fridge.FridgeDoorOpened();
         fridge.ItemAdded("Milk",    new DateTime(2021, 10, 21, 0, 0, 0), ItemState.Sealed);
@@ -62,8 +61,7 @@ public class SmartFridgeShould
     [Fact]
     public void Display_shows_empty_when_fridge_has_no_items()
     {
-        var fridge = new SmartFridge();
-        fridge.SetCurrentDate(new DateTime(2021,10,18));
+        var fridge = new SmartFridge(new DateTime(2021,10,18));
 
         Assert.Equal(string.Empty, fridge.Display());
     }

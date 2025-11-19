@@ -1,13 +1,8 @@
 ﻿namespace SmartFridge;
 
-public class SmartFridge{
-
+public class SmartFridge(DateTime dateTime)
+{
     private DateTime currentDate;
-
-    public void SetCurrentDate(DateTime dateTime)
-    {
-        currentDate = dateTime;
-    }
 
     public void FridgeDoorOpened()
     {
