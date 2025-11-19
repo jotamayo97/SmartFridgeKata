@@ -1,0 +1,10 @@
+# IDEs
+.idea/
+.vscode/
+
+# Build
+bin/
+obj/
+
+# Rider
+*.DotSettings.user
