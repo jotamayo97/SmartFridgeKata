@@ -7,14 +7,14 @@ public class SmartFridge(DateTime currentDate, EventManager manager)
         manager.RegisterEvent(new FridgeDoorOpenedEvent(currentDate));
     }
 
-    public void ItemAdded(string name, DateTime p1, ItemState @sealed)
+    public void ItemAdded(string name, DateTime expiry, ItemState state)
     {
-        throw new NotImplementedException();
+        manager.RegisterEvent(new ItemAddedEvent(name, expiry, state, currentDate ));
     }
 
     public void FridgeDoorClosed()
     {
-        throw new NotImplementedException();
+        manager.RegisterEvent(new FridgeDoorClosedEvent(currentDate));
     }
 
     public void DayOver()
@@ -29,6 +29,18 @@ public class SmartFridge(DateTime currentDate, EventManager manager)
 
     public string Display()
     {
-        return string.Empty;
+        var state = manager.Rebuild();
+        if (state.Count == 0)
+            return string.Empty;
+        var lines = new List<string>();
+        
+        foreach (var item in state.Values)
+        {
+            var remaining = (item.Expiry - currentDate).Days;
+            
+            lines.Add($"{item.Name}: {remaining} days remaining");
+        }
+
+        return string.Join("\n", lines);
     }
 }
