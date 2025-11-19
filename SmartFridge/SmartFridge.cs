@@ -12,7 +12,7 @@ public class SmartFridge
         throw new NotImplementedException();
     }
 
-    public void ItemAdded(string beef, string p1, string @sealed)
+    public void ItemAdded(string name, string p1, ItemState @sealed)
     {
         throw new NotImplementedException();
     }
@@ -27,7 +27,7 @@ public class SmartFridge
         throw new NotImplementedException();
     }
 
-    public void ItemRemoved(string milk)
+    public void ItemRemoved(string name)
     {
         throw new NotImplementedException();
     }

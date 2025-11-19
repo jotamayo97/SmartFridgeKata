@@ -9,10 +9,10 @@ public class SmartFridgeShould
         fridge.SetCurrentDate("18/10/2021");
 
         fridge.FridgeDoorOpened();
-        fridge.ItemAdded("Milk",    "21/10/21", "sealed");
-        fridge.ItemAdded("Cheese",  "18/11/21", "sealed");
-        fridge.ItemAdded("Beef",    "20/10/21", "sealed");
-        fridge.ItemAdded("Lettuce", "22/10/21", "sealed");
+        fridge.ItemAdded("Milk",    "21/10/21", ItemState.Sealed);
+        fridge.ItemAdded("Cheese",  "18/11/21", ItemState.Sealed);
+        fridge.ItemAdded("Beef",    "20/10/21", ItemState.Sealed);
+        fridge.ItemAdded("Lettuce", "22/10/21", ItemState.Sealed);
         fridge.FridgeDoorClosed();
 
         fridge.DayOver();
@@ -28,8 +28,8 @@ public class SmartFridgeShould
         fridge.FridgeDoorClosed();
 
         fridge.FridgeDoorOpened();
-        fridge.ItemAdded("Milk",    "26/10/21", "opened");
-        fridge.ItemAdded("Peppers", "23/10/21", "opened");
+        fridge.ItemAdded("Milk",    "26/10/21", ItemState.Opened);
+        fridge.ItemAdded("Peppers", "23/10/21", ItemState.Opened);
         fridge.FridgeDoorClosed();
 
         fridge.DayOver();
@@ -40,7 +40,7 @@ public class SmartFridgeShould
         fridge.FridgeDoorClosed();
 
         fridge.FridgeDoorOpened();
-        fridge.ItemAdded("Lettuce", "22/10/21", "opened");
+        fridge.ItemAdded("Lettuce", "22/10/21", ItemState.Opened);
         fridge.FridgeDoorClosed();
 
         fridge.FridgeDoorOpened();
